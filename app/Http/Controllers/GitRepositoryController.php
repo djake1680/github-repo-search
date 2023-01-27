@@ -102,7 +102,7 @@ class GitRepositoryController extends Controller
                 $gitRepo->repo_id = $repo['id'];
                 $gitRepo->repo_name = $repo['name'];
                 $gitRepo->username = $repo['owner']['login'];
-                $gitRepo->url = $repo['url'];
+                $gitRepo->url = $repo['html_url'];
                 $gitRepo->repo_created_date = Carbon::parse($repo['created_at'])->format('Y-m-d H:i:s');
                 $gitRepo->last_push_date = Carbon::parse($repo['pushed_at'])->format('Y-m-d H:i:s');
                 $gitRepo->description = $repo['description'];
@@ -112,7 +112,11 @@ class GitRepositoryController extends Controller
         }
 
         $response = Http::get($url);
-//        $i = 0;
         return $response;
+    }
+
+    public function gitReposUpdate() {
+        GitRepository::getQuery()->delete();
+        return $this->gitDataFetch(1000);
     }
 }

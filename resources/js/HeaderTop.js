@@ -8,9 +8,16 @@ export default {
   </div>
   <nav class="site-navigation">
     <ul class="nav">
-      <li><a href="#">Refresh Data</a></li>
+      <li>
+        <button class="load-data-button" v-if="dataCount === 0" @click="$emit('updateGitData')">Load Data</button>
+        <button class="load-data-button" v-if="dataCount > 0" @click="$emit('updateGitData')">Refresh Data</button>
+      </li>
     </ul>
   </nav>
 </header>
-`
+`,
+
+    props: {
+        dataCount: Number
+    }
 }

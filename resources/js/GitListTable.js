@@ -2,6 +2,7 @@ import DataTable from 'datatables.net-vue3';
 import DataTablesLib from 'datatables.net';
 import '../../node_modules/datatables.net-dt/css/jquery.dataTables.css';
 import '../../resources/css/gitTable.css';
+import { compareAsc, format } from 'date-fns';
 
 DataTable.use(DataTablesLib);
 
@@ -9,11 +10,10 @@ export default {
     template: `
       <div class="container table-display">
       <data-table
-          class="display"
+          class="display dataTableShow"
           :data="repoData"
           :columns="columns"
           :options="options"
-
       >
           <thead>
           <tr>
@@ -33,10 +33,14 @@ export default {
 
     components: { DataTable },
 
+    props: {
+        repoData: Array,
+        dataUpdated: String
+    },
+
     data() {
         return {
             repoCount: 1000,
-            repoData: [],
             columns: [
                 {"data": "star_count"},
                 {"data": "repo_id"},
@@ -56,25 +60,28 @@ export default {
                             return '<div><p>' + newData + '</p></div>';
                         },
                         targets: [4]
+                    },
+                    {
+                        render: function(data) {
+                            return '<a href="' + data + '" target="_blank">' + data + '</a>';
+                        },
+                        targets: [5]
+                    },
+                    {
+                        render: function(data) {
+                            return format(new Date(data), 'MM-dd-yyyy');
+                        },
+                        targets: [6, 7]
                     }
                 ]
             }
         }
     },
 
-    created() {
-        // fetch(`/gitDataFetch/${this.repoCount}`)
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log(data);
-        //     });
-
-        fetch(`/gitRepos`)
-            .then(response => response.json())
-            .then(data => {
-                this.repoData = data;
-            });
-
+    watch: {
+        dataUpdated(value) {
+            window.location.reload();
+        }
     }
 }
 

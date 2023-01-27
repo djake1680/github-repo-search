@@ -20,3 +20,4 @@ Route::get('/', function () {
 Route::resource('gitRepos', \App\Http\Controllers\GitRepositoryController::class);
 
 Route::get('/gitDataFetch/{repoCount}', 'App\Http\Controllers\GitRepositoryController@gitDataFetch');
+Route::get('gitReposUpdate', 'App\Http\Controllers\GitRepositoryController@gitReposUpdate');
