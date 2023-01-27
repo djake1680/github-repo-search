@@ -3,11 +3,13 @@ import DataTablesLib from 'datatables.net';
 import '../../node_modules/datatables.net-dt/css/jquery.dataTables.css';
 import '../../resources/css/gitTable.css';
 import { compareAsc, format } from 'date-fns';
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 
 DataTable.use(DataTablesLib);
 
 export default {
     template: `
+    <pulse-loader v-if="loading" :loading="loading" ></pulse-loader>
       <div class="container table-display">
       <data-table
           class="display dataTableShow"
@@ -31,11 +33,12 @@ export default {
       </div>
     `,
 
-    components: { DataTable },
+    components: { DataTable, PulseLoader },
 
     props: {
         repoData: Array,
-        dataUpdated: String
+        dataUpdated: String,
+        loading: Boolean
     },
 
     data() {

@@ -2,3 +2,10 @@
     width: 80%;
     margin: 0 auto 50px auto;
 }
+
+.v-spinner {
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+}
