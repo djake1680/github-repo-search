@@ -63,7 +63,7 @@ export default {
                     },
                     {
                         render: function(data) {
-                            return '<a href="' + data + '" target="_blank">' + data + '</a>';
+                            return '<a href="' + data + '" target="_blank" style="text-decoration: underline; color: blue;">' + data + '</a>';
                         },
                         targets: [5]
                     },

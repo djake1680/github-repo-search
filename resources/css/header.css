@@ -52,4 +52,9 @@ a {
 
 .load-data-button {
     padding: 10px;
+    border-radius: 8px;
+}
+
+.load-data-button:hover {
+    cursor: pointer;
 }
